@@ -5,13 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    
     @inertiaHead
     <title inertia>{{ config('app.name', 'Laravel Inertia') }}</title>
 
-    <!-- Scripts -->
     @viteReactRefresh
     @vite(['resources/css/app.css', 'resources/js/app.jsx'])
-    @inertiaHead
+
+    {{-- 👉 WAJIB untuk route() di React --}}
+    @routes
 </head>
 
 <body class="font-sans antialiased">

@@ -1,3 +1,5 @@
+import route from "ziggy-js";
+import { Ziggy } from "@/ziggy"; // penting untuk vite
 import React, { useState } from "react";
 import AppLayout from "@/layouts/AppLayout";
 import { Button } from "@/components/ui/button";
@@ -44,13 +46,13 @@ export default function CreateTodoPage() {
     e.preventDefault();
 
 
-    post(route("todos.store"), {
-        _method: "post",
-        title: data.title,
-        description: data.description,
-        cover: data.cover,
-        forceFormData: true,
-    });
+    post(route("todos.store", {}, Ziggy), {
+    title: data.title,
+    description: data.description,
+    cover: data.cover,
+    forceFormData: true,
+});
+
 };
 
     return (
