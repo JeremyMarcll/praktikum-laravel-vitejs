@@ -40,21 +40,19 @@ export default function CreateTodoPage() {
         }
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        
-        const formData = new FormData();
-        formData.append("title", data.title);
-        formData.append("description", data.description);
-        if (data.cover) {
-            formData.append("cover", data.cover);
-        }
+    const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        post("/todos", {
-            data: formData,
-            forceFormData: true,
-        });
-    };
+    await axios.get('/sanctum/csrf-cookie');
+
+    post(route("todos.store"), {
+        _method: "post",
+        title: data.title,
+        description: data.description,
+        cover: data.cover,
+        forceFormData: true,
+    });
+};
 
     return (
         <AppLayout>
