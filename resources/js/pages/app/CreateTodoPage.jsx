@@ -43,7 +43,6 @@ export default function CreateTodoPage() {
     const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await axios.get('/sanctum/csrf-cookie');
 
     post(route("todos.store"), {
         _method: "post",
