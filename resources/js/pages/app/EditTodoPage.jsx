@@ -44,27 +44,29 @@ export default function EditTodoPage() {
     };
 
     // ...existing code...
-const handleSubmit = (e) => {
-    e.preventDefault();
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-    // Client-side guard
-    if (!data.title || !data.title.toString().trim()) {
-        showError("Judul tidak boleh kosong");
-        return;
-    }
+        // Client-side guard
+        if (!data.title || !data.title.toString().trim()) {
+            showError("Judul tidak boleh kosong");
+            return;
+        }
 
-    // Kirim FormData hanya jika ada file, agar Inertia tetap bisa handle boolean & string
-    put(`/todos/${todo.id}`, {
-        forceFormData: !!data.cover, // hanya true kalau ada file
-        onSuccess: () => showSuccess("Todo berhasil diperbarui!"),
-        onError: (errs) => {
-            console.error("Validation errors (raw):", errs);
-            showError(Object.values(errs).flat().join(", ") || "Gagal menyimpan");
-        },
-    });
-};
+        // Kirim FormData hanya jika ada file, agar Inertia tetap bisa handle boolean & string
+        put(`/todos/${todo.id}`, {
+            forceFormData: !!data.cover, // hanya true kalau ada file
+            onSuccess: () => showSuccess("Todo berhasil diperbarui!"),
+            onError: (errs) => {
+                console.error("Validation errors (raw):", errs);
+                showError(
+                    Object.values(errs).flat().join(", ") || "Gagal menyimpan"
+                );
+            },
+        });
+    };
 
-// ...existing code...
+    // ...existing code...
 
     return (
         <AppLayout>
@@ -72,7 +74,10 @@ const handleSubmit = (e) => {
                 <div className="max-w-2xl mx-auto">
                     {/* Header */}
                     <div className="mb-6">
-                        <Link href="/todos" className="flex items-center gap-2 text-primary hover:underline mb-4">
+                        <Link
+                            href="/todos"
+                            className="flex items-center gap-2 text-primary hover:underline mb-4"
+                        >
                             <ArrowLeft className="w-4 h-4" />
                             Kembali ke Daftar
                         </Link>
@@ -97,7 +102,10 @@ const handleSubmit = (e) => {
                                 <FieldGroup>
                                     <Field>
                                         <FieldLabel htmlFor="title">
-                                            Judul <span className="text-red-500">*</span>
+                                            Judul{" "}
+                                            <span className="text-red-500">
+                                                *
+                                            </span>
                                         </FieldLabel>
                                         <Input
                                             id="title"
@@ -144,10 +152,16 @@ const handleSubmit = (e) => {
                                                 id="is_finished"
                                                 checked={data.is_finished}
                                                 onCheckedChange={(checked) =>
-                                                    setData("is_finished", checked)
+                                                    setData(
+                                                        "is_finished",
+                                                        checked
+                                                    )
                                                 }
                                             />
-                                            <FieldLabel htmlFor="is_finished" className="mb-0">
+                                            <FieldLabel
+                                                htmlFor="is_finished"
+                                                className="mb-0"
+                                            >
                                                 Tandai sebagai selesai
                                             </FieldLabel>
                                         </div>
@@ -190,17 +204,21 @@ const handleSubmit = (e) => {
                                                                 className="max-h-48 mx-auto mb-2 rounded"
                                                             />
                                                             <p className="text-sm text-muted-foreground">
-                                                                Klik untuk mengubah gambar
+                                                                Klik untuk
+                                                                mengubah gambar
                                                             </p>
                                                         </>
                                                     ) : (
                                                         <>
                                                             <Upload className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
                                                             <p className="text-sm font-medium mb-1">
-                                                                Klik untuk upload gambar baru
+                                                                Klik untuk
+                                                                upload gambar
+                                                                baru
                                                             </p>
                                                             <p className="text-xs text-muted-foreground">
-                                                                PNG, JPG, GIF (Max 2MB)
+                                                                PNG, JPG, GIF
+                                                                (Max 2MB)
                                                             </p>
                                                         </>
                                                     )}
@@ -218,9 +236,7 @@ const handleSubmit = (e) => {
                                 {/* Buttons */}
                                 <div className="flex gap-2 justify-end pt-4">
                                     <Link href="/todos">
-                                        <Button variant="outline">
-                                            Batal
-                                        </Button>
+                                        <Button variant="outline">Batal</Button>
                                     </Link>
                                     <Button
                                         type="submit"
