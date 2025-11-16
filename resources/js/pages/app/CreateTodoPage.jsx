@@ -1,5 +1,3 @@
-import route from "ziggy-js";
-import { Ziggy } from "@/ziggy"; // penting untuk vite
 import React, { useState } from "react";
 import AppLayout from "@/layouts/AppLayout";
 import { Button } from "@/components/ui/button";

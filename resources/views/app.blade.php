@@ -12,8 +12,7 @@
     @viteReactRefresh
     @vite(['resources/css/app.css', 'resources/js/app.jsx'])
 
-    {{-- 👉 WAJIB untuk route() di React --}}
-    @routes
+   
 </head>
 
 <body class="font-sans antialiased">
