@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useForm, usePage } from "@inertiajs/react";
 import AuthLayout from "@/layouts/AuthLayout";
@@ -30,10 +29,15 @@ export default function LoginPage() {
         remember: false,
     });
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        post("/auth/login/post");
+    const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    // WAJIB: Ambil XSRF-TOKEN dari Sanctum
+    await axios.get("/sanctum/csrf-cookie");
+
+    post("/auth/login/post");
     };
+
 
     return (
         <AuthLayout>
